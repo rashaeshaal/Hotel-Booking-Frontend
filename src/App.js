@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register'; 
+import SinglePost from './pages/SinglePost';
+import Navbar from './components/Navbar';
+import HotelPosts from './components/HotelPosts'; 
+import { UserProvider } from './context/UserContext';
+import CreatePost from './components/CreatePost'; 
+import UpdatePost from './pages/UpdatePost';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
+import EditPost from './pages/EditPost';
+import PaymentGateway from './components/PaymentGateway';
+import PostList from './components/PostList';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <UserProvider> {/* Wrap your application with UserProvider */}
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/posts" element={<HotelPosts />} /> {/* Display BlogPosts on /posts */}
+            <Route path="/posts/:id" element={<SinglePost />} />
+            <Route path="/posts/:id/update" element={<UpdatePost />} />
+            <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/login" element={<Login />} />  {/* Route for Login */}
+            <Route path="/register" element={<Register />} />  {/* Route for Register */}
+            <Route path="/admin-login" element={<AdminLogin />}/>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/hotels/:id/edit" element={<EditPost />} />
+            <Route path="/payment-gateway" element={<PaymentGateway />} />
+            <Route path="/post-list" element={<PostList />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+    </UserProvider>
   );
 }
 
