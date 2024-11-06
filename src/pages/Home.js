@@ -10,17 +10,17 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`${Base_url}accounts/postsviews/`);
-            console.log('Fetched Posts:', response.data); 
-            setPosts(response.data || []);
-        } catch (err) {
-            setError(err.response?.data?.detail || 'Failed to fetch posts');
-            console.error('Fetch Error:', err); 
-        } finally {
-            setLoading(false);
-        }
+      setLoading(true);
+      try {
+        const response = await axios.get(`${Base_url}accounts/postsviews/`);
+        console.log('Fetched Posts:', response.data); 
+        setPosts(response.data || []);
+      } catch (err) {
+        setError(err.response?.data?.detail || 'Failed to fetch posts');
+        console.error('Fetch Error:', err); 
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchPosts();
@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-4 text-center">Welcome</h1>
-      <p className="text-lg text-center mb-6">Explore the latest Hotel</p>
+      <p className="text-lg text-center mb-6">Explore the latest Hotels</p>
 
       {loading ? (
         <p className="text-center">Loading...</p>
@@ -54,13 +54,16 @@ const Home = () => {
                 ) : (
                   <p>No image available</p>
                 )}
+              
                 <p className="text-gray-700 mb-4">{post.content.slice(0, 100)}...</p>
+                <p className="text-lg font-bold mb-4">Amount: ${post.amount}</p> {/* Display amount */}
                 <div className="text-right">
-                <Link
-                to="/payment-gateway"  
-                className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
-  Book
-</Link>
+                  <Link
+                    to="/payment-gateway"  
+                    className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                  >
+                    Book
+                  </Link>
                 </div>
               </div>
             );

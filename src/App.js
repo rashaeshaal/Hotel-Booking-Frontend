@@ -14,6 +14,7 @@ import AdminDashboard from './components/AdminDashboard';
 import EditPost from './pages/EditPost';
 import PaymentGateway from './components/PaymentGateway';
 import PostList from './components/PostList';
+import EditPostPage from './components/EditPostPage';
 function App() {
   return (
   <UserProvider> {/* Wrap your application with UserProvider */}
@@ -31,9 +32,9 @@ function App() {
             <Route path="/register" element={<Register />} />  {/* Route for Register */}
             <Route path="/admin-login" element={<AdminLogin />}/>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/hotels/:id/edit" element={<EditPost />} />
             <Route path="/payment-gateway" element={<PaymentGateway />} />
             <Route path="/post-list" element={<PostList />} />
+            <Route path="/hotels/:id/edit" element={<EditPostPage />} />
           </Routes>
         </main>
       </div>
